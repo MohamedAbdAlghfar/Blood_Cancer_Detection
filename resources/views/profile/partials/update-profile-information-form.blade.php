@@ -109,15 +109,15 @@
         <li><a href="/dashboard">Home</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="{{ route('profile.edit') }}">Profile</a></li>
-        <li><a href="/history">History</a></li>
+        <li><a href="/patients">Patients</a></li>
         <li><a href="/contact">Contact Us</a></li>
         <li>
             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                 @csrf
                 <button type="submit" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i> Log Out
-                </button>
-            </form>
+                </button> 
+            </form> 
         </li>
     </ul>
 </header>
@@ -142,15 +142,6 @@
             <input id="phone" name="phone" type="text" value="{{ old('phone', $user->phone) }}" required>
         </div>
 
-        <div>
-            <label for="age">Age</label>
-            <input id="age" name="age" type="number" value="{{ old('age', $user->age) }}" required>
-        </div>
-
-        <div>
-            <label for="address">Address</label>
-            <input id="address" name="address" type="text" value="{{ old('address', $user->address) }}" required>
-        </div>
 
         <div style="margin-top: 10px;">
             <button type="submit">Save</button>

@@ -43,44 +43,17 @@
                 <input id="password_confirmation" type="password" name="password_confirmation" class="w-full border rounded-lg p-3 mt-1 focus:ring focus:ring-blue-300" required>
             </div>
             
-            <div class="mb-4">
-                <label for="address" class="block font-semibold">Address</label>
-                <input id="address" type="text" name="address" class="w-full border rounded-lg p-3 mt-1 focus:ring focus:ring-blue-300" required>
-            </div>
             
             <div class="mb-4">
                 <label for="phone" class="block font-semibold">Phone</label>
                 <input id="phone" type="text" name="phone" class="w-full border rounded-lg p-3 mt-1 focus:ring focus:ring-blue-300" required>
             </div>
             
-            <div class="mb-4">
-                <label class="block font-semibold">Gender</label>
-                <div class="flex space-x-4 mt-1">
-                    <label class="flex items-center">
-                        <input type="radio" name="gender" value="male" class="form-radio text-blue-500"> 
-                        <span class="ml-2">Male</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="radio" name="gender" value="female" class="form-radio text-blue-500"> 
-                        <span class="ml-2">Female</span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label for="age" class="block font-semibold">Age</label> 
-                <input id="age" type="number" name="age" class="w-full border rounded-lg p-3 mt-1 focus:ring focus:ring-blue-300" required>
-            </div>
-            
-            <div class="mb-4">
-                <label for="photo" class="block font-semibold">Profile Image</label>
-                <input id="photo" type="file" name="photo" class="w-full border rounded-lg p-3 mt-1">
-            </div>
             
             <div class="flex items-center justify-between mt-6">
                 <a href="{{ route('login') }}" class="text-sm text-blue-500 hover:underline">Already registered?</a>
                 <button type="submit" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Register</button>
-            </div>
+            </div> 
         </form>
     </div>
 </body>

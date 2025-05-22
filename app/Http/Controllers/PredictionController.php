@@ -51,13 +51,12 @@ class PredictionController extends Controller
        $diagnosis = new BloodDiagnosis();
        $diagnosis->photo = $photo;  // Store image path
        $diagnosis->diagnoses = $prediction; // Store ML result
-       $diagnosis->user_id = Auth::user()->id; // store user_id 
+       $diagnosis->patient_id = $request->input('patient_id');  // Store selected patient ID
        $diagnosis->save();
-
-
+       
 
            return view('result',compact('prediction'));
-        // Return prediction result as JSON 
+        // Return prediction result as JSON  
        // return response()->json($prediction);
     }
 }

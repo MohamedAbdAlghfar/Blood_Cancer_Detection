@@ -464,7 +464,7 @@
         <li><a href="/dashboard">Home</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="{{ route('profile.edit') }}">Profile</a></li>
-        <li><a href="/history">History</a></li>
+        <li><a href="/patients">Patients</a></li>
         <li><a href="/contact">Contact Us</a></li>
         <li>
             <form method="POST" action="{{ route('logout') }}" style="display: inline;">

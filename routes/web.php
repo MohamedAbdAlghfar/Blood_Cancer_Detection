@@ -3,8 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
-use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PredictionController;
+use App\Http\Controllers\PatientController;
+use App\Models\Patient;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,31 +20,41 @@ use App\Http\Controllers\PredictionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome'); 
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard'); 
 
-Route::get('/about', function () {
+    $user = Auth::user();         
+    $patients = $user->Patients()->get();
+   
+    return view('dashboard', compact('patients'));
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/about', function () { 
     return view('about');
-})->middleware(['auth', 'verified'])->name('about'); 
+})->middleware(['auth', 'verified'])->name('about');  
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/predict', [PredictionController::class, 'predict'])->name('predict');
-});
+    Route::get('/contact', function () {
+        return view('contact');
+    });
+    
+     
+    Route::get('/patients', [PatientController::class, 'viewPatients'])->middleware(['auth', 'verified'])->name('patients'); 
+    
+    Route::post('/send-email', [MailController::class, 'sendEmail'])->name('send.email');
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+    Route::get('/CreatePatient', [PatientController::class, 'create'])->middleware(['auth', 'verified'])->name('CreatePatient');
+    Route::post('/StorePatient', [PatientController::class, 'store'])->middleware(['auth', 'verified'])->name('StorePatient');
+    Route::get('/patients/{id}', [PatientController::class, 'show'])->name('patients.show');
 
- 
-Route::get('/history', [HistoryController::class, 'index'])->middleware(['auth', 'verified'])->name('history'); 
+}); 
 
-Route::post('/send-email', [MailController::class, 'sendEmail'])->name('send.email');
+
 
 require __DIR__.'/auth.php';  

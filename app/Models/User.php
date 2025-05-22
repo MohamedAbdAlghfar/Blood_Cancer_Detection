@@ -20,12 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password', 
+        'password',  
         'phone',
-        'gender',
-        'age',
-        'address',
-        'photo',
     ];
 
     /**
@@ -39,10 +35,7 @@ class User extends Authenticatable
     ];
 
 
-    public function BloodDiagnoses()
-    {
-        return $this->hasMany('App\Models\BloodDiagnosis');
-    }
+   
 
     /**
      * The attributes that should be cast.
@@ -53,4 +46,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function Patients() {
+        return $this->belongsToMany('App\Models\Patient'); 
+    }
+
+
+
+
 }

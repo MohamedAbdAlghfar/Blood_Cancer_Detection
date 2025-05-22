@@ -11,13 +11,13 @@ class BloodDiagnosis extends Model
     protected $fillable = [
         'diagnoses',
         'photo',
-        'user_id',
+        'patient_id',  
     ];
 
 
-    public function User()
+    public function Patient()
     {
-     return $this->belongsTo('App\Models\User');
+     return $this->belongsTo('App\Models\Patient'); 
     }
     
 

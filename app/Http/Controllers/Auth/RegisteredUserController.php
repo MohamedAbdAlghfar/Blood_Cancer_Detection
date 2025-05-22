@@ -34,42 +34,17 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'address' => ['required'], 
             'phone' => ['required'],
-            'gender' => ['required'],
-            'age' => ['required'], 
-
         ]);
 
 
-        if($file = $request->file('photo')) {
-
-            $filename = $file->getClientOriginalName();
-            $fileextension = $file->getClientOriginalExtension();
-            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
-
-            if($file->move('images', $file_to_store)) {
-                    $photo = $file_to_store ;
-            }
-        }
-
-
-
-
-        if($request->gender == "male")
-        $gender = 0 ;
-        else
-        $gender = 1 ;
+        
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password), 
-            'address' => $request->address,
             'phone' => $request->phone,
-            'age' => $request->age,
-            'gender' => $gender,
-            'photo' => $photo,
         ]);
 
         event(new Registered($user));

@@ -9,7 +9,7 @@
             <div class="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
                 
                 
-                <div class="w-full">
+                <div class="w-full"> 
                     @include('profile.partials.update-profile-information-form')
                 </div>
             </div>

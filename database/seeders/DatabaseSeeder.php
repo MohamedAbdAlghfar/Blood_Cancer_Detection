@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\BloodDiagnosis;
+use App\Models\Patient;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,8 +22,20 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::factory(10)->create();
-        BloodDiagnosis::factory(30)->create();
+        $users = User::factory(10)->create();
+        $patients = Patient::factory(50)->create();
+        BloodDiagnosis::factory(100)->create(); 
+
+      
+        foreach ($users as $user) {
+            $patients_ids = [];
+
+            $patients_ids[] = Patient::all()->random()->id;
+            $patients_ids[] = Patient::all()->random()->id;
+            $patients_ids[] = Patient::all()->random()->id;
+            $patients_ids[] = Patient::all()->random()->id;
+            $user->Patients()->sync( $patients_ids );
+        }
         
 
     }

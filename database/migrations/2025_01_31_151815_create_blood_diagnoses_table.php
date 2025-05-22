@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('blood_diagnoses', function (Blueprint $table) {
             $table->id(); 
             $table->string('photo');
-            $table->string('diagnoses');
+            $table->string('diagnoses'); 
 
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamps();
+            $table->bigInteger('patient_id')->unsigned();
+            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->timestamps(); 
         });
     }
 

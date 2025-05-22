@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnosis History</title>
+    <title>Patients</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
@@ -62,7 +62,6 @@
             color: #ffcc00;
         }
 
-        /* Logout Button */
         .logout-btn {
             background: none;
             border: none;
@@ -80,7 +79,6 @@
             color: #ffcc00;
         }
 
-        /* Container */
         .container {
             width: 80%;
             margin: 40px auto;
@@ -100,7 +98,6 @@
             padding-bottom: 5px;
         }
 
-        /* Table Styling */
         .table {
             width: 100%;
             border-collapse: collapse;
@@ -119,16 +116,14 @@
             font-size: 18px;
         }
 
-        .table td img {
-            border-radius: 5px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
         .table tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f1f1f1; 
         }
 
-        /* Responsive Design */
+        .table tr {
+            cursor: pointer;
+        }
+
         @media (max-width: 768px) {
             .container {
                 width: 95%;
@@ -153,7 +148,7 @@
         <li><a href="/dashboard">Home</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="{{ route('profile.edit') }}">Profile</a></li>
-        <li><a href="/history">History</a></li>
+        <li><a href="/patients">Patients</a></li>
         <li><a href="/contact">Contact Us</a></li>
         <li>
             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
@@ -167,23 +162,41 @@
 </header>
 
 <div class="container">
-    <h2>Diagnosis History</h2>
+    <h2>Patients</h2>
+
+    <!-- Search Bar -->
+    <form method="GET" action="" style="margin-bottom: 20px; text-align: right;">
+        <input type="text" name="search" placeholder="Search by patient name" value="{{ request('search') }}"
+               style="padding: 10px; width: 250px; border-radius: 8px; border: 1px solid #ccc;">
+        <button type="submit"
+                style="padding: 10px 15px; background-color: #046791; color: white; border: none; border-radius: 8px; cursor: pointer;">
+            Search
+        </button>
+    </form>
+
+    <!-- Table -->
     <table class="table">
         <thead>
             <tr>
-                <th>Photo</th>
-                <th>Diagnoses</th>
-                <th>Date & Time</th>
+                <th>Patient name</th>
+                <th>Patient age</th> 
+                <th>Patient address</th>
+                <th>Patient phone</th>
             </tr>
-        </thead>
+        </thead> 
         <tbody>
-            @foreach($history as $record)
-                <tr>
-                    <td><img src="{{ asset('images/' . $record->photo) }}" width="100" alt="Blood Diagnosis"></td>
-                    <td>{{ $record->diagnoses }}</td>
-                    <td>{{ $record->created_at }}</td>
+            @forelse($patients as $patient)
+                <tr onclick="window.location.href='{{ route('patients.show', $patient->id) }}'">
+                    <td>{{ $patient->name }}</td>
+                    <td>{{ $patient->age }}</td>
+                    <td>{{ $patient->address }}</td> 
+                    <td>{{ $patient->phone }}</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="4">No patients found.</td> 
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
