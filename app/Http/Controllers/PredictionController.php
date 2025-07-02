@@ -4,59 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
 use App\Models\BloodDiagnosis;
-use Illuminate\Support\Facades\Auth;
 
 class PredictionController extends Controller
 {
     public function predict(Request $request)
     {
-        // Validate the image upload
+        // Validate image input
         $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        // Get the uploaded file
         $image = $request->file('photo');
 
-        // Send the image to the ML model in Google Colab
+        // Send image to ML API
         $response = Http::withHeaders([
             'ngrok-skip-browser-warning' => 'true'
         ])->attach(
-            'file', // This must match the key expected by the Flask API ('file')
+            'file',
             file_get_contents($image->getRealPath()),
             $image->getClientOriginalName()
         )->post('http://127.0.0.1:5000/api/predict');
 
-        // Decode the response
-        $prediction = $response->json();
-        $prediction = $prediction['prediction'];
+        $responseData = $response->json();
 
-       //save image in project
-       if($file = $request->file('photo')) {
-
-        $filename = $file->getClientOriginalName();
-        $fileextension = $file->getClientOriginalExtension();
-        $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.'.$fileextension;
-
-        if($file->move('images', $file_to_store)) {
-                $photo = $file_to_store ;
+        // Check if it's a valid blood image
+        if (!($responseData['is_blood_image'] ?? false)) {
+            return view('result', ['prediction' => $responseData['prediction']]);
         }
-    }
 
+        // Save image locally
+        $file_to_store = null;
+        if ($image) {
+            $filename = $image->getClientOriginalName();
+            $fileextension = $image->getClientOriginalExtension();
+            $file_to_store = time() . '_' . pathinfo($filename, PATHINFO_FILENAME) . '_.'.$fileextension;
+            $image->move('images', $file_to_store);
+        }
 
+        // Save prediction in DB
+        $diagnosis = new BloodDiagnosis();
+        $diagnosis->photo = $file_to_store;
+        $diagnosis->diagnoses = $responseData['prediction'];
+        $diagnosis->patient_id = $request->input('patient_id');
+        $diagnosis->save();
 
-       // Save the image path and prediction result to the database
-       $diagnosis = new BloodDiagnosis();
-       $diagnosis->photo = $photo;  // Store image path
-       $diagnosis->diagnoses = $prediction; // Store ML result
-       $diagnosis->patient_id = $request->input('patient_id');  // Store selected patient ID
-       $diagnosis->save();
-       
-
-           return view('result',compact('prediction'));
-        // Return prediction result as JSON  
-       // return response()->json($prediction);
+        // Show result view
+        return view('result', ['prediction' => $responseData['prediction']]);
     }
 }

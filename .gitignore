@@ -18,6 +18,15 @@ yarn-error.log
 /.idea
 /.vscode
 *.h5
+*.keras
+*.rar
+*.zip
+*.pkl
+*.pt
+*.csv
+*.png
+*.jpg
+gp/blood_cancer_model.keras
 
 
 
