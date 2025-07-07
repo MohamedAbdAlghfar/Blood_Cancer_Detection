@@ -22,7 +22,6 @@ yarn-error.log
 *.rar
 *.zip
 *.pkl
-*.pt
 *.csv
 *.png
 *.jpg
