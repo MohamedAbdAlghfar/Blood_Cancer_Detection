@@ -1,74 +1,187 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🩸 Blood Cancer Detection System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack deep learning-based web application for detecting **leukemia stages** from blood cell images. Built with **Laravel (PHP)** for the web backend and **Flask (Python)** for serving ML models, this system provides doctors with an easy interface for uploading patient images and receiving a fast and accurate diagnosis using pretrained CNN models.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📊 System Architecture
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![System Architecture](https://github.com/MohamedAbdAlghfar/Blood_Cancer_Detection/assets/your-image-id)  
+<sub>*Note: Replace the above link with your GitHub-hosted image URL or GitHub raw content if pushed.*</sub>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The system follows a three-tier architecture:
+- **Presentation Layer:** Laravel web interface where doctors register/login, upload images, and view predictions.
+- **Application Layer:** Flask handles image filtering (is it a valid blood cell?) and classification (cancer stage).
+- **Data Layer:** Stores users, patients, predictions, and images.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🧠 Project Overview
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Problem:** Early-stage leukemia detection is difficult, often requiring invasive and slow tests.
+- **Solution:** AI-powered classification of microscopic images of blood using InceptionV3 and CNN models.
+- **Goal:** Automatically detect stages of leukemia (Benign, Early Pre-B, Pre-B, Pro-B) with high accuracy.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🩺 Features
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+✅ Detect if an uploaded image is a valid blood cell image  
+✅ Classify valid images into 4 stages of leukemia  
+✅ Doctor login/register + profile edit  
+✅ Add/manage patients  
+✅ Store and view diagnosis history  
+✅ Contact admin form and feedback  
+✅ PDF-report ready database schema
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## 🧩 Models Used
 
-## Contributing
+| Model           | Role                                | Accuracy   |
+|----------------|-------------------------------------|------------|
+| `blood_detector.h5`   | Checks if uploaded image is a blood cell     | ~98.5%     |
+| `blood_cancer_model.keras` | Classifies into 4 leukemia stages using InceptionV3 | 99.62%     |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 📁 Project Structure
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```plaintext
+Blood_Cancer_Detection/
+├── main.py                  # Flask API for ML
+├── blood_detector.h5        # Blood image filter model
+├── blood_cancer_model.keras # Cancer classification model
+└── gp/                      # Laravel web app
+    ├── app/Http/Controllers/
+    ├── routes/web.php
+    ├── resources/views/
+    └── database/migrations/
+🔌 How to Run Locally
+1. Run the Flask Server
+bash
+Copy
+Edit
+cd Blood_Cancer_Detection
+pip install flask tensorflow pillow flask-cors
+python main.py
+This starts the Flask ML API at http://127.0.0.1:5000.
 
-## Security Vulnerabilities
+2. Run Laravel Web App
+bash
+Copy
+Edit
+cd gp
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+Visit: http://localhost:8000
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Make sure XAMPP is running Apache and MySQL, and the DB is created (blood_cancer_detection).
 
-## License
+🔗 API Endpoints (Flask)
+Method	Route	Description
+GET	/api/healthcheck	Confirms model is loaded
+POST	/api/predict	Accepts image and returns result
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# Blood_Cancer_Detection
->>>>>>> 25204f63b52a099b3733a6ef1cc6d1fc9e5402ac
-=======
-# Blood_Cancer_Detection
->>>>>>> 33a6d46c60a297e49c5088b046df70372e569a1d
+Example response:
+
+json
+Copy
+Edit
+{
+  "success": true,
+  "is_blood_image": true,
+  "prediction": "Pre-B",
+  "confidence": 94.25
+}
+🛡 Error Handling
+Condition	Behavior
+No file uploaded	400 error with message
+Invalid blood image	Informative JSON response
+Model not loaded	500 internal error
+Prediction fails	JSON error + traceback logged
+
+🧪 Datasets Used
+Blood Cancer Dataset (4 classes):
+
+Early Pre-B, Pre-B, Pro-B, Benign
+
+Train/Val/Test = 80/10/10%
+
+Blood Filter Dataset (2 classes):
+
+Blood Image, Not Blood Image
+
+1328 images split 80/20
+
+📸 Screenshots
+Include screenshots here if desired:
+
+Dashboard
+
+Upload Form
+
+Diagnosis Result
+
+Patient Profile
+
+Contact Admin
+
+👨‍💻 Authors
+Mohamed Abdalghfar Mohamed – GitHub
+
+Ramy Hany Attia Hanna
+
+Mostafa Mohamed Wael Said
+
+Mahmoud Atef Mohamed Mahmoud
+
+Mina Ashraf Girges Danial
+
+Khaled Mohamed Salah Ahmed
+
+Supervised by:
+
+Dr. Shaimaa Haridy
+
+TA. Nagwa Mostafa
+Faculty of Computers and Information, Ain Shams University
+
+🔮 Future Enhancements
+Real-time camera predictions
+
+Integration with Electronic Health Records (EHR)
+
+Admin dashboard and analytics
+
+Automatic PDF generation for diagnoses
+
+📜 License
+This project is licensed for educational and research purposes under the terms defined by the graduation committee of Ain Shams University. Contact authors for reuse permissions.
+
+⭐ Star this repo if it helped you or inspired your project!
+
+yaml
+Copy
+Edit
+
+---
+
+### ✅ To finalize:
+- Replace `![System Architecture](...)` image path with your **GitHub-hosted diagram**.
+- Add optional screenshots if you wish.
+- Push the file as `README.md` to the root of your GitHub repository.
+
+Let me know if you want me to generate that image URL for the architecture diagram or help write a `LICENSE.md`.
+
+
+
+
+
+
+
+
+Ask ChatGPT
