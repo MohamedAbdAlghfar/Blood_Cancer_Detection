@@ -48,7 +48,7 @@ The system follows a three-tier architecture:
 
 ## 📁 Project Structure
 
-```plaintext
+plaintext
 Blood_Cancer_Detection/
 ├── main.py                  # Flask API for ML
 ├── blood_detector.h5        # Blood image filter model
