@@ -112,7 +112,7 @@ Blood Image, Not Blood Image
 
 1328 images split 80/20
 
-📸 Screenshots
+## 📸 Screenshots
 
 Dashboard
 ![WhatsApp Image 2025-06-26 at 02 16 33_c8ea607b](https://github.com/user-attachments/assets/b070d561-ba3d-4bd6-be3c-94d551ed94bb)
