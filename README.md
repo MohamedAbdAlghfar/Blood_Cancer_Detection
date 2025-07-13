@@ -6,8 +6,9 @@ A full-stack deep learning-based web application for detecting **leukemia stages
 
 ## 📊 System Architecture
 
-![System Architecture](https://github.com/MohamedAbdAlghfar/Blood_Cancer_Detection/assets/your-image-id)  
-<sub>*Note: Replace the above link with your GitHub-hosted image URL or GitHub raw content if pushed.*</sub>
+
+![Slide1](https://github.com/user-attachments/assets/dfa4642e-bf5a-45f5-ac78-52b372afe1df)
+
 
 The system follows a three-tier architecture:
 - **Presentation Layer:** Laravel web interface where doctors register/login, upload images, and view predictions.
