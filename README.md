@@ -58,20 +58,17 @@ Blood_Cancer_Detection/
     ├── routes/web.php
     ├── resources/views/
     └── database/migrations/
-🔌 How to Run Locally
+
+## 🔌 How to Run Locally
 1. Run the Flask Server
-bash
-Copy
-Edit
+
 cd Blood_Cancer_Detection
 pip install flask tensorflow pillow flask-cors
 python main.py
 This starts the Flask ML API at http://127.0.0.1:5000.
 
 2. Run Laravel Web App
-bash
-Copy
-Edit
+
 cd gp
 composer install
 cp .env.example .env
@@ -82,21 +79,18 @@ Visit: http://localhost:8000
 
 Make sure XAMPP is running Apache and MySQL, and the DB is created (blood_cancer_detection).
 
-🔗 API Endpoints (Flask)
+## 🔗 API Endpoints (Flask)
 Method	Route	Description
 GET	/api/healthcheck	Confirms model is loaded
 POST	/api/predict	Accepts image and returns result
 
 Example response:
 
-json
-Copy
-Edit
+
 {
   "success": true,
   "is_blood_image": true,
   "prediction": "Pre-B",
-  "confidence": 94.25
 }
 🛡 Error Handling
 Condition	Behavior
@@ -105,7 +99,7 @@ Invalid blood image	Informative JSON response
 Model not loaded	500 internal error
 Prediction fails	JSON error + traceback logged
 
-🧪 Datasets Used
+## 🧪 Datasets Used
 Blood Cancer Dataset (4 classes):
 
 Early Pre-B, Pre-B, Pro-B, Benign
@@ -119,19 +113,27 @@ Blood Image, Not Blood Image
 1328 images split 80/20
 
 📸 Screenshots
-Include screenshots here if desired:
 
 Dashboard
+![WhatsApp Image 2025-06-26 at 02 16 33_c8ea607b](https://github.com/user-attachments/assets/b070d561-ba3d-4bd6-be3c-94d551ed94bb)
 
 Upload Form
+![WhatsApp Image 2025-06-26 at 02 18 34_a07e0427](https://github.com/user-attachments/assets/5a2ffc6b-82f8-497e-af68-ff40a6a05a7d)
 
 Diagnosis Result
+![WhatsApp Image 2025-06-26 at 02 28 26_20b1212a](https://github.com/user-attachments/assets/81f2422d-eb54-41f5-9248-79ea4b905e26)
 
 Patient Profile
+![WhatsApp Image 2025-06-26 at 02 24 00_2046f8cf](https://github.com/user-attachments/assets/789a84e8-d941-48a0-a799-2af6f963f02b)
+
+Doctor Profile
+![WhatsApp Image 2025-06-26 at 02 22 50_d9b4fa6e](https://github.com/user-attachments/assets/38d86d22-da77-421c-9a24-189b65cac25b)
 
 Contact Admin
+![WhatsApp Image 2025-06-26 at 02 25 44_ce361e4e](https://github.com/user-attachments/assets/0f5d1a61-ab40-4dc0-8bda-fdfc6f4a1976)
 
-👨‍💻 Authors
+
+## 👨‍💻 Authors
 Mohamed Abdalghfar Mohamed – GitHub
 
 Ramy Hany Attia Hanna
@@ -151,7 +153,7 @@ Dr. Shaimaa Haridy
 TA. Nagwa Mostafa
 Faculty of Computers and Information, Ain Shams University
 
-🔮 Future Enhancements
+## 🔮 Future Enhancements
 Real-time camera predictions
 
 Integration with Electronic Health Records (EHR)
@@ -160,23 +162,8 @@ Admin dashboard and analytics
 
 Automatic PDF generation for diagnoses
 
-📜 License
-This project is licensed for educational and research purposes under the terms defined by the graduation committee of Ain Shams University. Contact authors for reuse permissions.
 
-⭐ Star this repo if it helped you or inspired your project!
 
-yaml
-Copy
-Edit
-
----
-
-### ✅ To finalize:
-- Replace `![System Architecture](...)` image path with your **GitHub-hosted diagram**.
-- Add optional screenshots if you wish.
-- Push the file as `README.md` to the root of your GitHub repository.
-
-Let me know if you want me to generate that image URL for the architecture diagram or help write a `LICENSE.md`.
 
 
 
