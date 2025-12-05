@@ -172,4 +172,4 @@ Automatic PDF generation for diagnoses
 
 
 
-Ask ChatGPT
+
